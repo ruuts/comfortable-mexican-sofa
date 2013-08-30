@@ -1,0 +1,236 @@
+# encoding: utf-8
+nl:
+  # -- Models ---------------------------------------------------------------
+  attributes:
+    label: Label
+    slug: Slug
+    parent_id: Parent
+    content: Inhoud
+    identifier: Identificatie
+  activerecord:
+    models:
+      cms/site: Website
+      cms/layout: Layout
+      cms/page: Pagina
+      cms/snippet: Snippet
+      cms/file: Bestand
+    attributes:
+      cms/site:
+        identifier: Indentificatie
+        hostname: Hostname
+        path: Pad
+        locale: Taal
+        is_mirrored: Gespiegeld
+      cms/layout:
+        identifier: Indentificatie
+        label: Layout naam
+        app_layout: App Layout
+        parent_id: Parent Layout
+        css: Stylesheet
+        js: Javascript
+      cms/page:
+        label: Label
+        layout_id: Layout
+        slug: Slug
+        target_page_id: Redirecten naar pagina
+        is_published: Gepubliseerd
+      cms/file:
+        file: Bestand
+        description: Omschrijving
+      cms/snippet:
+        identifier: Indentificatie
+        
+  # -- Controllers ----------------------------------------------------------
+  cms:
+    base:
+      site_not_found: Website niet gevonden
+      fixtures_enabled: CMS Fixtures zijn niet ingeschakeld. Alle wijzigingen zullen niet worden toegepast.
+      
+    sites:
+      created: Website aangemaakt
+      creation_failure: Website kon niet worden aangemaakt
+      updated: Website geupdate
+      update_failure: Website kon niet worden geupdate
+      deleted: Website verwijderd
+      not_found: Website niet gevonden
+      
+    layouts:
+      created: Layout aangemaakt
+      creation_failure: Layout kon niet worden aangemaakt
+      updated: Layout geupdate
+      update_failure: Layout kon niet worden geupdate
+      deleted: Layout verwijderd
+      not_found: Layout niet gevonden
+      
+    pages:
+      created: Pagina aangemaakt
+      creation_failure: Pagina kon niet worden aangemaakt
+      updated: Pagina geupdate
+      update_failure: Pagina kon niet worden geupdate
+      deleted: Pagina verwijderd
+      not_found: Pagina niet gevonden
+      layout_not_found: Geen layouts gevonden. Maak je er één.
+      
+    snippets:
+      created: Deeltje aangemaakt
+      creation_failure: Deeltje kon niet worden aangemaakt
+      updated: Deeltje geupdate
+      update_failure: Deeltje kon niet worden geupdate
+      deleted: Deeltje verwijderd
+      not_found: Deeltje niet gevonden
+      
+    revisions:
+      reverted: Inhoud teruggeplaatst
+      record_not_found: Document niet gevonden
+      not_found: Revisie niet gevonden
+      
+    files:
+      created: Bestanden aangemaakt
+      creation_failure: Bestanden konden niet worden aangemaakt
+      updated: Bestanden geupdate
+      update_failure: Bestanden konden niet worden geupdate
+      deleted: Bestanden verwijderd
+      not_found: Bestanden niet gevonden
+      
+    content:
+      site_not_found: Website niet gevonden
+      layout_not_found: Layout niet gevonden
+      page_not_found: Pagina niet gevonden
+  
+  # -- Views ----------------------------------------------------------------
+  cms_admin:
+    base:
+      sites: Websites
+      layouts: Layouts
+      pages: Pagina's
+      snippets: Deeltjes
+      files: Bestanden
+      
+    sites:
+      index:
+        title: Websites
+        new_link: Maak een nieuwe website
+        select: Selecteer website
+        edit: Bewerk
+        delete: Verwijder
+        are_you_sure: Weet je zeker dat je deze website wil verwijderen?
+      new:
+        title: Nieuwe website
+      edit:
+        title: Website bewerken
+      form:
+        create: Website aangemaakt
+        update: Website geupdate
+        is_mirrored: Gespiegeld
+        
+    layouts:
+      index:
+        title: Layouts
+        new_link: Maak een nieuwe layout
+      index_branch:
+        add_child_layout: Voeg een sub layout toe
+        edit: Bewerk
+        delete: Verwijder
+        are_you_sure: Weet je het zeker?
+      new:
+        title: Nieuwe layout
+      edit:
+        title: Layout bewerken
+        revision: Revisies
+      form:
+        select_parent_layout: Selecteer een basis layout
+        select_app_layout: Selecteer een applicatie layout
+        create: Layout aangemaakt
+        update: Layout geupdate
+      
+    pages:
+      index:
+        title: Pagina's
+        new_link: Maak nieuwe pagina
+      index_branch:
+        toggle: Schakelen
+        add_child_page: Voeg een sub pagina toe
+        edit: Bewerk
+        delete: Verwijder
+        are_you_sure: Weet je het zeker?
+      new:
+        title: Nieuwe pagina
+      edit:
+        title: Pagina bewerken
+        revision: Revisies
+      form:
+        select_target_page: Geen redirect
+        preview: Preview
+        create: Maak een pagina
+        update: Update pagina
+        is_published: Gepubliseerd
+      form_blocks:
+        no_tags: |-
+          Layout heeft geen inhoud tags gedefinieerd.<br/>
+          Bewerk de inhoud zodat deze een pagina of invoer tag bevat. Bijvoorbeeld: <code>{{cms:page:content}}</code>
+      
+    snippets:
+      index:
+        title: Deeltjes
+        new_link: Maak een nieuwe deeltje
+        edit: Bewerk
+        delete: Verwijder
+        are_you_sure: Weet je het zeker?
+      new:
+        title: Nieuw deeltje
+      edit:
+        title: Bewerk deeltje
+        revision: Revisie
+      form:
+        create: Maak deeltje
+        update: Update deeltje
+          
+    revisions:
+      show:
+        title: Revisies voor
+        revision: Revisie
+        full_path: Volledige pad 
+        slug: Slug
+        update: Update naar deze revisie
+        current: Huidige
+      
+    files:
+      index:
+        title: Bestanden
+        new_link: Upload een nieuw bestand
+        edit: Bewerk
+        delete: Verwijder
+        are_you_sure: Weet je het zeker?
+        button: Upload bestanden
+      new:
+        title: Nieuw bestand
+      edit:
+        title: Bewerk bestand
+      form:
+        current_file: Huidige bestand
+        create: Upload bestand
+        update: Update bestand
+      page_form:
+        are_you_sure: Weet je het zeker?
+      file:
+        are_you_sure: Weet je het zeker?
+        
+    categories:
+      index:
+        label: Categorieën
+        edit: Bewerk
+        done: Klaar
+        all: Allemaal
+        add: Bewerk
+      show:
+        are_you_sure: Weet je het zeker?
+      edit:
+        save: Opslaan
+      form:
+        label: Categorieën
+        
+    dialogs:
+      image:
+        insert: Voeg een plaatje toe
+      link:
+        create: Maak een link
