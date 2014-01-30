@@ -31,13 +31,13 @@ class Cms::Site < ActiveRecord::Base
   validates :identifier,
     :presence   => true,
     :uniqueness => true,
-    :format     => { :with => /^\w[a-z0-9_-]*$/i }
+    :format     => { :with => /\A\w[a-z0-9_-]*\z/i }
   validates :label,
     :presence   => true
   validates :hostname,
     :presence   => true,
     :uniqueness => { :scope => :path },
-    :format     => { :with => /^[\w\.\-]+(?:\:\d+)?$/ }
+    :format     => { :with => /\A[\w\.\-]+(?:\:\d+)?\z/ }
     
   # -- Scopes ---------------------------------------------------------------
   scope :mirrored, where(:is_mirrored => true)
@@ -50,7 +50,7 @@ class Cms::Site < ActiveRecord::Base
     Cms::Site.find_all_by_hostname(real_host_from_aliases(host)).each do |site|
       if site.path.blank?
         cms_site = site
-      elsif "#{path.to_s.split('?')[0]}/".match /^\/#{Regexp.escape(site.path.to_s)}\//
+      elsif "#{path.to_s.split('?')[0]}/".match /\A\/#{Regexp.escape(site.path.to_s)}\//
         cms_site = site
         break
       end
